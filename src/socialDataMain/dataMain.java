@@ -5,6 +5,7 @@ import java.util.*;
 import org.jgrapht.graph.*;
 
 public class dataMain{
+	
 	public static void main(String []args) throws FileNotFoundException{
 		// create a member for undirectedGraph
 		DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> netBaseDireG = directGraphB();
@@ -13,9 +14,6 @@ public class dataMain{
 		//System.out.println(netBaseDireG.toString());
 		
 	}
-	
-	
-	
 	
 	//direct graph build
 	public static  DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> directGraphB() throws FileNotFoundException{
@@ -94,5 +92,6 @@ public class dataMain{
 			return null;
 		}
 	}
+	
 	
 }
