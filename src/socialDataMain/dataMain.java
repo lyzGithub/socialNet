@@ -14,13 +14,17 @@ public class dataMain{
 		//System.out.println(netBaseDireG.toString());
 		
 	}
+	//Indirect graph
+	public static void undirectGraphB(){
+		
+	}
 	
 	//direct graph build
 	public static  DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> directGraphB() throws FileNotFoundException{
 		DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> netBaseDireG =
 	            new DefaultDirectedWeightedGraph<String, DefaultWeightedEdge>(DefaultWeightedEdge.class);
 		System.out.println("Please wait, laoding data!!");
-		File netDataIn = new File("twitterData\\testUnDirectNet.txt");//("twitterData\\follower_gcc.anony.dat");
+		File netDataIn = new File("twitterData\\mention_gcc.anony.dat");//("twitterData\\follower_gcc.anony.dat");
 		//File edgeDataIn = new File("twitterData\\testDirectEdgeInfo.txt");
 		if(netDataIn.exists() ){ 
 			// add the vertices and edges
@@ -57,7 +61,7 @@ public class dataMain{
 				int allInDegree = 0;
 				for(Object element2: vertexSet){
 					if(netBaseDireG.containsEdge(element2.toString(), element1.toString())){
-						//System.out.println("in add!");
+						System.out.println("in add!");
 						DefaultWeightedEdge e = netBaseDireG.getEdge(element2.toString(), element1.toString() );
 						allInDegree += netBaseDireG.getEdgeWeight(e);
 					}
@@ -66,7 +70,7 @@ public class dataMain{
 					if(netBaseDireG.containsEdge(element2.toString(), element1.toString())){
 						DefaultWeightedEdge e = netBaseDireG.getEdge(element2.toString(), element1.toString());
 						double dPlusp = netBaseDireG.getEdgeWeight(e)+(double)1/(allInDegree);
-						//System.out.println("dplusp: "+dPlusp);
+						System.out.println("dplusp: "+dPlusp);
 						netBaseDireG.setEdgeWeight(e, dPlusp);
 					}
 				}
