@@ -11,23 +11,116 @@ public class dataMain{
 	
 	public static void main(String []args) throws FileNotFoundException{
 		// create a member for undirectedGraph
-		DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> netBaseDireG = directGraphB();
+		/*DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> netBaseDireG = directGraphB1();
 		if(null == netBaseDireG)
 			System.out.println("build direct graph fail!");
 		//System.out.println(netBaseDireG.toString());
+		 */
+		 
+		
+		myDirectB();
 		
 	}
-	//Indirect graph
-	public static WeightedGraph<String, DefaultEdge> undirectGraphB(){
-		WeightedGraph<String, DefaultWeightedEdge> netWeiGraph = 
-				new DefaultDirectedWeightedGraph<String, DefaultWeightedEdge>(DefaultWeightedEdge.class);
+	//////////////////////////////////////////////////////
+	//my direct graph	
+	public static directedGraph myDirectB() throws FileNotFoundException{
+		directedGraph mygraph = new directedGraph();
+		System.out.println("laoding data!");
+		File netB  = new File("twitterData\\follower_gcc.anony.dat");
+		long startTime = 0;
+		long endTime = 0;
+		if(netB.exists()){
+			startTime = System.currentTimeMillis();
+			Scanner netVerInput1 = new Scanner(netB);
+			String s = "";
+			while(netVerInput1.hasNextLine()){
+				s = netVerInput1.nextLine();
+				String[] ss = s.split(" ");
+				mygraph.addVertex(ss[0]);
+				mygraph.addVertex(ss[1]);
+				mygraph.addEdge(ss[0], ss[1]);
+			}
+			endTime = System.currentTimeMillis();
+			System.out.println("my vertexes add spend : " +( endTime-startTime) + " ms.");
+			netVerInput1.close();
+			
+			/*
+			startTime = System.currentTimeMillis();
+			Scanner netVerInput2 = new Scanner(netB);
+			while(netVerInput2.hasNextLine()){
+				s = netVerInput2.nextLine();
+				String[] ss = s.split(" ");
+				mygraph.addEdge(ss[0], ss[1]);
+			}
+			endTime = System.currentTimeMillis();
+			System.out.println("my edges add spend : " +( endTime-startTime) + " ms.");
+			netVerInput2.close();
+			*/
+			
+		}
 		
 		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+	/////////////////////////////////////////////////
+	//Indirect graph
+	public static DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> directGraphB1() throws FileNotFoundException{
+		DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> netWeiGraph = 
+				new DefaultDirectedWeightedGraph<String, DefaultWeightedEdge>(DefaultWeightedEdge.class);
+		System.out.println("laoding data!");
+		File netB  = new File("twitterData\\follower_gcc.anony.dat");
+		long startTime = 0;
+		long endTime = 0;
+		if(netB.exists()){
+			Scanner netVerInput1 = new Scanner(netB);
+			String s = "";
+			startTime = System.currentTimeMillis();
+			while(netVerInput1.hasNextLine()){
+				s = netVerInput1.nextLine();
+				String[] ss = s.split(" ");
+				if(false == netWeiGraph.containsVertex(ss[0])){
+					//System.out.println("add vertex: " + ss[0]);
+					netWeiGraph.addVertex(ss[0]);
+				}
+				if(false == netWeiGraph.containsVertex(ss[1])){
+					//System.out.println("add vertex: " + ss[0]);
+					netWeiGraph.addVertex(ss[1]);
+				}
+				//netWeiGraph.addEdge(ss[0], ss[1]);
+				//netWeiGraph.addEdge(ss[1], ss[0]);
+			}
+			endTime = System.currentTimeMillis();
+			System.out.println("vertexes add spend : " +( endTime-startTime) + " ms.");
+			netVerInput1.close();
+			startTime = System.currentTimeMillis();
+			Scanner netVerInput2 = new Scanner(netB);
+			while(netVerInput2.hasNextLine()){
+				s= netVerInput2.nextLine();
+				String[] ss = s.split(" ");
+				netWeiGraph.addEdge(ss[0], ss[1],new DefaultWeightedEdge());
+				netWeiGraph.addEdge(ss[1], ss[0],new DefaultWeightedEdge());
+			}
+			endTime = System.currentTimeMillis();
+			System.out.println("edges add spend : " +( endTime-startTime) + " ms.");
+			netVerInput2.close();
+		}
+		else{
+			System.out.println("file path is wrong!");
+			return null;
+		}
+		return netWeiGraph;
 		
 	}
 	
+	///////////////////////////////////////////////////////
 	//direct graph build
-	public static  DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> directGraphB() throws FileNotFoundException{
+	public static  DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> directGraphB2() throws FileNotFoundException{
 		DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> netBaseDireG =
 	            new DefaultDirectedWeightedGraph<String, DefaultWeightedEdge>(DefaultWeightedEdge.class);
 		System.out.println("Please wait, laoding data!!");
