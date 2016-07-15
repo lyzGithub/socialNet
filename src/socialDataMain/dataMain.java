@@ -2,7 +2,10 @@ package socialDataMain;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+
+import org.jgrapht.WeightedGraph;
 import org.jgrapht.graph.*;
+import org.jgrapht.graph.builder.UndirectedGraphBuilder;
 
 public class dataMain{
 	
@@ -15,7 +18,11 @@ public class dataMain{
 		
 	}
 	//Indirect graph
-	public static void undirectGraphB(){
+	public static WeightedGraph<String, DefaultEdge> undirectGraphB(){
+		WeightedGraph<String, DefaultWeightedEdge> netWeiGraph = 
+				new DefaultDirectedWeightedGraph<String, DefaultWeightedEdge>(DefaultWeightedEdge.class);
+		
+		return null;
 		
 	}
 	
