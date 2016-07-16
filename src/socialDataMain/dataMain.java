@@ -7,18 +7,22 @@ import org.jgrapht.WeightedGraph;
 import org.jgrapht.graph.*;
 import org.jgrapht.graph.builder.UndirectedGraphBuilder;
 
+import testBag.testMain;
+
 public class dataMain{
 	
 	public static void main(String []args) throws FileNotFoundException{
 		// create a member for undirectedGraph
-		/*DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> netBaseDireG = directGraphB1();
+		/*
+		DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> netBaseDireG = directGraphB2();
 		if(null == netBaseDireG)
 			System.out.println("build direct graph fail!");
+			
 		//System.out.println(netBaseDireG.toString());
 		 */
-		 
+		testMain.main();
 		
-		myDirectB();
+		//myDirectB();
 		
 	}
 	//////////////////////////////////////////////////////
@@ -161,7 +165,7 @@ public class dataMain{
 				int allInDegree = 0;
 				for(Object element2: vertexSet){
 					if(netBaseDireG.containsEdge(element2.toString(), element1.toString())){
-						System.out.println("in add!");
+						//System.out.println("in add!");
 						DefaultWeightedEdge e = netBaseDireG.getEdge(element2.toString(), element1.toString() );
 						allInDegree += netBaseDireG.getEdgeWeight(e);
 					}
@@ -170,7 +174,7 @@ public class dataMain{
 					if(netBaseDireG.containsEdge(element2.toString(), element1.toString())){
 						DefaultWeightedEdge e = netBaseDireG.getEdge(element2.toString(), element1.toString());
 						double dPlusp = netBaseDireG.getEdgeWeight(e)+(double)1/(allInDegree);
-						System.out.println("dplusp: "+dPlusp);
+						//System.out.println("dplusp: "+dPlusp);
 						netBaseDireG.setEdgeWeight(e, dPlusp);
 					}
 				}
