@@ -4,10 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Scanner;
-
+//for analysis the data 
 public class testMain {
-	public static  void main() throws FileNotFoundException{
-		// conclude infor fron data
+	public static void sumVertex() throws FileNotFoundException{
 		System.out.println("Please wait, laoding data to compute num of ver!!");
 		File netDataIn = new File("twitterData\\follower_gcc.anony.dat");//("twitterData\\follower_gcc.anony.dat");
 		HashMap<String,String> netVer = new HashMap<String,String>();
@@ -26,5 +25,11 @@ public class testMain {
 		else{
 			System.out.println("net data file path wrong !" +netDataIn.getAbsolutePath());
 		}
+	}
+	public static void pandingEdge(){
+		File followerData = new File("twitterData\\follower_gcc.anony.dat");
+		File mentionData = new File("twitterData\\mention_gcc.anony.dat");
+		File retweetData = new File("twitterData\\retweet_gcc.anony.dat");
+		
 	}
 }
