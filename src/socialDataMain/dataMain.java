@@ -1,36 +1,110 @@
 package socialDataMain;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
 import org.jgrapht.graph.*;
 
+
 public class dataMain{
 	
 	public static void main(String []args) throws IOException{
 		// create a member for directedGraph
-		DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> newDDWG = directGraphBuild();
-		System.out.println(newDDWG.toString());
+		//DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> newDDWG = directGraphBuild();
+		//System.out.println(newDDWG.toString());
+		directedGraph nwGraph = myGraphBuilding();
+	}
+	///////////////////////////////////////////////////////
+	// direct graph build using my own graph class
+	/*
+	 * first build direct graph by follower_gcc.anony.dat second add edge weight
+	 * by mention or retweet data
+	 */
+	public static directedGraph myGraphBuilding() throws FileNotFoundException{
+		
+		directedGraph netGraph = new directedGraph();
+		File followerTest = null;
+		File mentionTest = null;
+		File retweetTest = null;
+		int i = 0;
+		System.out.println("input number 0 for twit data, 1 for test data:");
+		Scanner sc  = new Scanner(System.in);
+		i = sc.nextInt();
+		if(0 == i){
+			followerTest = new File("twitterData\\follower_gcc.anony.dat");
+			mentionTest = new File("twitterData\\mention_gcc.anony.dat");
+			retweetTest =new File("twitterData\\retweet_gcc.anony.dat");
+		}
+		else if(1 == i){
+			followerTest = new File("twitterData\\followerNet.txt");
+			mentionTest = new File("twitterData\\mentionNet.txt");
+			retweetTest = new File("twitterData\\retweetNet.txt");
+		}
+		else{
+			System.out.println("wrong input!");
+			exit(0);
+		}
+		
+		
+		System.out.println("Please wait, laoding data(my)!!");
+		if(followerTest.exists() && mentionTest.exists() && retweetTest.exists()){ 
+			long startTime = System.currentTimeMillis();
+			Scanner netVerInput = new Scanner(followerTest);
+			while(netVerInput.hasNextLine()){
+				String s = netVerInput.nextLine();
+				String []ss = s.split(" ");
+				netGraph.addVertex(ss[0]);
+				netGraph.addVertex(ss[1]);
+				netGraph.addEdge(ss[0], ss[1]);
+				netGraph.addEdge(ss[1], ss[0]);
+			}
+			netVerInput.close();
+			long endTime = System.currentTimeMillis();
+			System.out.println("Graph built! seconds spend: " + (endTime-startTime)/1000.0 + " s.");
+			
+			return netGraph;
+		}
+		else {
+			System.out.println("net data file path wrong !" );
+			return null;
+		}
 		
 	}
 	
 	///////////////////////////////////////////////////////
-	//direct graph build
+	// direct graph build using grapht
 	/*
-	 * first build direct graph by follower_gcc.anony.dat
-	 * second add edge weight by mention or retweet data
+	 * first build direct graph by follower_gcc.anony.dat second add edge weight
+	 * by mention or retweet data
 	 */
 	public static  DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> directGraphBuild() throws IOException{
 		DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> netBaseDireG =
 	            new DefaultDirectedWeightedGraph<String, DefaultWeightedEdge>(DefaultWeightedEdge.class);
+		
+		File followerTest = null;
+		File mentionTest = null;
+		File retweetTest = null;
+		int i = 0;
+		System.out.println("input number 0 for twit data, 1 for test data:");
+		Scanner sc  = new Scanner(System.in);
+		i = sc.nextInt();
+		if(0 == i){
+			followerTest = new File("twitterData\\follower_gcc.anony.dat");
+			mentionTest = new File("twitterData\\mention_gcc.anony.dat");
+			retweetTest =new File("twitterData\\retweet_gcc.anony.dat");
+		}
+		else if(1 == i){
+			followerTest = new File("twitterData\\followerNet.txt");
+			mentionTest = new File("twitterData\\mentionNet.txt");
+			retweetTest = new File("twitterData\\retweetNet.txt");
+		}
+		else{
+			System.out.println("wrong input!");
+			exit(0);
+		}
 		System.out.println("Please wait, laoding data!!");
-		//File followerTest = new File("twitterData\\follower_gcc.anony.dat");
-		//File mentionTest = new File("twitterData\\mention_gcc.anony.dat");
-		//File retweetTest =new File("twitterData\\retweet_gcc.anony.dat");
-		File followerTest = new File("twitterData\\followerNet.txt");
-		File mentionTest = new File("twitterData\\mentionNet.txt");
-		File retweetTest = new File("twitterData\\retweetNet.txt");
 		if(followerTest.exists() && mentionTest.exists() && retweetTest.exists()){ 
 			// add the vertices and edges
 			//follower
@@ -40,8 +114,10 @@ public class dataMain{
 				String s = netVerInput.nextLine();
 				String[] ss = s.split(" ");
 				//add vertexes
-				netBaseDireG.addVertex(ss[0]);
-				netBaseDireG.addVertex(ss[1]);
+				if(false == netBaseDireG.containsVertex(ss[0]))
+					netBaseDireG.addVertex(ss[0]);
+				if(false == netBaseDireG.containsVertex(ss[1]))
+					netBaseDireG.addVertex(ss[1]);
 				//add edge
 				netBaseDireG.addEdge(ss[0], ss[1]);
 				netBaseDireG.addEdge(ss[1], ss[0]);
@@ -148,6 +224,19 @@ public class dataMain{
 			System.out.println("net data file path wrong !" +followerTest.getAbsolutePath());
 			return null;
 		}
+	}
+	public static File fileClassBuild(String path){
+		if(path == null){
+			System.out.println("path null!!");
+			return null;
+		}
+		File file = new File(path);
+		return file;
+	}
+
+	private static void exit(int i) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
