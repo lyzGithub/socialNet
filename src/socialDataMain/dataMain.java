@@ -59,10 +59,45 @@ public class dataMain{
 				netGraph.addVertex(ss[1]);
 				netGraph.addEdge(ss[0], ss[1]);
 				netGraph.addEdge(ss[1], ss[0]);
+				//System.out.println("in net!");
 			}
 			netVerInput.close();
 			long endTime = System.currentTimeMillis();
 			System.out.println("Graph built! seconds spend: " + (endTime-startTime)/1000.0 + " s.");
+			
+			
+			System.out.println("mention add(my func)!");
+			startTime = System.currentTimeMillis();
+			Scanner mentionInput = new Scanner(mentionTest);
+			while(mentionInput.hasNextLine()){
+				String s = mentionInput.nextLine();
+				String []ss = s.split(" ");
+				double weight = Double.parseDouble(ss[2]);
+				netGraph.plusEdgeWeight(ss[0], ss[1], weight);
+				netGraph.plusEdgeWeight(ss[0], ss[1], weight);
+			}
+			mentionInput.close();
+			endTime = System.currentTimeMillis();
+			System.out.println("Mention infor add seconds spend: " + (endTime-startTime)/1000.0 + " s.");
+			
+			//retweet
+			System.out.println("retweet add(my func)!");
+			startTime = System.currentTimeMillis();
+			Scanner retweetInput = new Scanner(retweetTest);
+			while(retweetInput.hasNextLine()){
+				String s = retweetInput.nextLine();
+				String []ss = s.split(" ");
+				double weight = Double.parseDouble(ss[2]);
+				netGraph.plusEdgeWeight(ss[0], ss[1], weight);
+				netGraph.plusEdgeWeight(ss[0], ss[1], weight);
+			
+			}
+			retweetInput.close();
+			endTime = System.currentTimeMillis();
+			System.out.println("Mention infor add seconds spend: " + (endTime-startTime)/1000.0 + " s.");
+			
+			
+			
 			
 			return netGraph;
 		}
@@ -72,6 +107,18 @@ public class dataMain{
 		}
 		
 	}
+	
+	//compute possibility function: simple infer from weight from edge,
+	//possibility is save in the double's decimal(1.9 is 0.9 p)
+	public static directedGraph computePoSimple(directedGraph netG){
+		
+		directedGraph tempG = netG;
+		
+		
+		return tempG;
+	}
+	
+	
 	
 	///////////////////////////////////////////////////////
 	// direct graph build using grapht
