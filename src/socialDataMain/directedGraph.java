@@ -15,7 +15,7 @@ public class directedGraph {
 	//add ver add new sapce for edge
 	public boolean addVertex(String sAdd){
 		
-		if(vertexMap.containsKey(sAdd))
+		if(true == vertexMap.containsKey(sAdd))
 			return true;
 		vertexMap.put(sAdd, new HashMap<String, Double>());
 		return true;
@@ -27,8 +27,11 @@ public class directedGraph {
 		
 		if(true == vertexMap.containsKey(ver1)){
 			HashMap<String, Double> temp = vertexMap.get(ver1);
-			temp.put(ver2, 0.0);
-			return true;
+			if(false == temp.containsKey(ver2)){
+				temp.put(ver2, 0.0);
+				return true;
+			}
+			return false;
 		}
 		else{
 			return false;
@@ -40,8 +43,11 @@ public class directedGraph {
 		
 		if(true == vertexMap.containsKey(ver1)){
 			HashMap<String, Double> temp = vertexMap.get(ver1);
-			temp.put(ver2, weight);
-			return true;
+			if(false == temp.containsKey(ver2)){
+				temp.put(ver2, weight);
+				return true;
+			}
+			return false;
 		}
 		else{
 			return false;
