@@ -7,6 +7,7 @@ import java.util.*;
 
 import org.jgrapht.graph.*;
 
+import myGraph.directedGraph;
 
 public class dataMain{
 	
@@ -15,6 +16,7 @@ public class dataMain{
 		//DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> newDDWG = directGraphBuild();
 		//System.out.println(newDDWG.toString());
 		directedGraph nwGraph = myGraphBuilding();
+		System.out.println("Graph:"+nwGraph.toString());
 	}
 	///////////////////////////////////////////////////////
 	// direct graph build using my own graph class

@@ -1,4 +1,4 @@
-package socialDataMain;
+package myGraph;
 
 import java.util.HashMap;
 
@@ -212,6 +212,13 @@ public class directedGraph {
 			
 		}
 		return false;
+	}
+	
+	public String toString(){
+		String s = "";
+		
+		return null;
+		
 	}
 	
 }
