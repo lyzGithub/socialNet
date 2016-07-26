@@ -101,7 +101,7 @@ public class dataMain{
 			System.out.println("Mention infor add seconds spend: " + (endTime-startTime)/1000.0 + " s.");
 			
 			
-			
+			netGraph = computePoSimple(netGraph);
 			sc.close();
 			return netGraph;
 		}
