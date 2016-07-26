@@ -75,8 +75,9 @@ public class dataMain{
 				String s = mentionInput.nextLine();
 				String []ss = s.split(" ");
 				double weight = Double.parseDouble(ss[2]);
+				//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!"+weight);
 				netGraph.plusEdgeWeight(ss[0], ss[1], weight);
-				netGraph.plusEdgeWeight(ss[0], ss[1], weight);
+				netGraph.plusEdgeWeight(ss[1], ss[0], weight);
 			}
 			mentionInput.close();
 			endTime = System.currentTimeMillis();
@@ -90,8 +91,9 @@ public class dataMain{
 				String s = retweetInput.nextLine();
 				String []ss = s.split(" ");
 				double weight = Double.parseDouble(ss[2]);
+				//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!"+weight);
 				netGraph.plusEdgeWeight(ss[0], ss[1], weight);
-				netGraph.plusEdgeWeight(ss[0], ss[1], weight);
+				netGraph.plusEdgeWeight(ss[1], ss[0], weight);
 			
 			}
 			retweetInput.close();
@@ -100,10 +102,11 @@ public class dataMain{
 			
 			
 			
-			
+			sc.close();
 			return netGraph;
 		}
 		else {
+			sc.close();
 			System.out.println("net data file path wrong !" );
 			return null;
 		}
@@ -139,6 +142,7 @@ public class dataMain{
 		System.out.println("input number 0 for twit data, 1 for test data:");
 		Scanner sc  = new Scanner(System.in);
 		i = sc.nextInt();
+		
 		if(0 == i){
 			followerTest = new File("twitterData\\follower_gcc.anony.dat");
 			mentionTest = new File("twitterData\\mention_gcc.anony.dat");
@@ -267,12 +271,15 @@ public class dataMain{
 				}
 			}
 			fileWriter.close();
+			sc.close();
 			return netBaseDireG;
 		}
 		else {
+			sc.close();
 			System.out.println("net data file path wrong !" +followerTest.getAbsolutePath());
 			return null;
 		}
+		
 	}
 	public static File fileClassBuild(String path){
 		if(path == null){

@@ -1,6 +1,9 @@
 package myGraph;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
+
 
 //directed graph
 public class directedGraph {
@@ -15,6 +18,19 @@ public class directedGraph {
 			allDegree = 0;
 			inDegree = 0;
 			outDegree = 0;
+		}
+		@SuppressWarnings("rawtypes")
+		public String toString(){
+			String s = "";
+			s += "degree:(alldegree:"+allDegree+" inDegree:"+inDegree+" outDegree:"+outDegree+")\nver2:\n";
+			Iterator<Entry<String, double[]>> iter = edgeInfor.entrySet().iterator();
+			while(iter.hasNext()){
+				HashMap.Entry entry = (HashMap.Entry) iter.next();
+				Object key = entry.getKey();
+				double []tm = edgeInfor.get(key);
+				s +="{" + key + " weight:"+tm[0]+" prob:"+tm[1]+"}\n";
+			}
+			return s;
 		}
 		public boolean iscontainVer2(String ver2){
 			return edgeInfor.containsKey(ver2);
@@ -65,6 +81,7 @@ public class directedGraph {
 			if(edgeInfor.containsKey(ver2)){
 				double []tm = edgeInfor.get(ver2);
 				tm[1] = prob;
+				edgeInfor.put(ver2, tm);
 				return true;
 			}
 			return false;
@@ -73,6 +90,7 @@ public class directedGraph {
 			if(edgeInfor.containsKey(ver2)){
 				double []tm = edgeInfor.get(ver2);
 				tm[1] += prob;
+				edgeInfor.put(ver2, tm);
 				return true;
 			}
 			return false;
@@ -81,6 +99,7 @@ public class directedGraph {
 			if(edgeInfor.containsKey(ver2)){
 				double []tm = edgeInfor.get(ver2);
 				return tm[1];
+				
 			}
 			return -1;
 			
@@ -89,6 +108,7 @@ public class directedGraph {
 			if(edgeInfor.containsKey(ver2)){
 				double []tm = edgeInfor.get(ver2);
 				tm[0] = w;
+				edgeInfor.put(ver2, tm);
 				return true;
 			}
 			return false;
@@ -97,6 +117,7 @@ public class directedGraph {
 			if(edgeInfor.containsKey(ver2)){
 				double []tm = edgeInfor.get(ver2);
 				tm[0] += plus;
+				edgeInfor.put(ver2, tm);
 				return true;
 			}
 			return false;
@@ -214,10 +235,17 @@ public class directedGraph {
 		return false;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public String toString(){
 		String s = "";
-		
-		return null;
+		Iterator<Entry<String, verInfor>> iter = vertexMap.entrySet().iterator();
+		while(iter.hasNext()){
+			HashMap.Entry entry = (HashMap.Entry) iter.next();
+			Object key = entry.getKey();
+			verInfor tm = vertexMap.get(key);
+			s += ("vertex:"+key+", vertext information:\n"+tm.toString()+"\n");
+		}
+		return s;
 		
 	}
 	
