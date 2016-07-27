@@ -16,9 +16,9 @@ public class dataMain{
 		// create a member for directedGraph
 		//DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> newDDWG = directGraphBuild();
 		//System.out.println(newDDWG.toString());
-		testMain.sumVertex();
-		//directedGraph nwGraph = myGraphBuilding();
-		//System.out.println("Graph:"+nwGraph.toString());
+		//testMain.sumVertex();
+		directedGraph nwGraph = myGraphBuilding();
+		System.out.println("Graph:"+nwGraph.toString());
 	}
 	///////////////////////////////////////////////////////
 	// direct graph build using my own graph class
@@ -56,7 +56,7 @@ public class dataMain{
 		if(followerTest.exists() && mentionTest.exists() && retweetTest.exists()){ 
 			long startTime = System.currentTimeMillis();
 			Scanner netVerInput = new Scanner(followerTest);
-			long  gt = 0;
+			//long  gt = 0;
 			while(netVerInput.hasNextLine()){
 				String s = netVerInput.nextLine();
 				String []ss = s.split(" ");
@@ -64,10 +64,10 @@ public class dataMain{
 				netGraph.addVertex(ss[1]);
 				netGraph.addEdge(ss[0], ss[1]);
 				netGraph.addEdge(ss[1], ss[0]);
-				gt++;
-				System.out.println(gt);
+				//gt++;
+				//System.out.println(gt);
 				/*
-				 * 12757339(14273311)
+				 * 12757339(14273311) error occur in 12757339 line : java space
 				 * 
 				 */
 			}
@@ -122,7 +122,7 @@ public class dataMain{
 	}
 	
 	//compute possibility function: simple infer from weight from edge,
-	//possibility is save in the double's decimal(1.9 is 0.9 p)
+	//possibility is save in the double's decimal(0.9 p)
 	public static directedGraph computePoSimple(directedGraph netG){
 		
 		directedGraph tempG = netG;
@@ -130,8 +130,15 @@ public class dataMain{
 		
 		return tempG;
 	}
-	
-	
+	//compute possibility function: netRate infer from weight from edge,
+	//possibility is save in the double's decimal(0.9 p)
+	public static directedGraph computePoNetRate(directedGraph netG){
+		
+		directedGraph tempG = netG;
+		
+		
+		return tempG;
+	}
 	
 	///////////////////////////////////////////////////////
 	// direct graph build using grapht
