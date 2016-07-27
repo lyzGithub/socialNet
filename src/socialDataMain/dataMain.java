@@ -8,6 +8,7 @@ import java.util.*;
 import org.jgrapht.graph.*;
 
 import myGraph.directedGraph;
+import testBag.testMain;
 
 public class dataMain{
 	
@@ -15,8 +16,9 @@ public class dataMain{
 		// create a member for directedGraph
 		//DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> newDDWG = directGraphBuild();
 		//System.out.println(newDDWG.toString());
-		directedGraph nwGraph = myGraphBuilding();
-		System.out.println("Graph:"+nwGraph.toString());
+		testMain.sumVertex();
+		//directedGraph nwGraph = myGraphBuilding();
+		//System.out.println("Graph:"+nwGraph.toString());
 	}
 	///////////////////////////////////////////////////////
 	// direct graph build using my own graph class
@@ -54,6 +56,7 @@ public class dataMain{
 		if(followerTest.exists() && mentionTest.exists() && retweetTest.exists()){ 
 			long startTime = System.currentTimeMillis();
 			Scanner netVerInput = new Scanner(followerTest);
+			long  gt = 0;
 			while(netVerInput.hasNextLine()){
 				String s = netVerInput.nextLine();
 				String []ss = s.split(" ");
@@ -61,7 +64,12 @@ public class dataMain{
 				netGraph.addVertex(ss[1]);
 				netGraph.addEdge(ss[0], ss[1]);
 				netGraph.addEdge(ss[1], ss[0]);
-				//System.out.println("in net!");
+				gt++;
+				System.out.println(gt);
+				/*
+				 * 12757339(14273311)
+				 * 
+				 */
 			}
 			netVerInput.close();
 			long endTime = System.currentTimeMillis();
