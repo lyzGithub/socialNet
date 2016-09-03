@@ -18,7 +18,8 @@ public class dataMain{
 		//System.out.println(newDDWG.toString());
 		//testMain.sumVertex();
 		directedGraph nwGraph = myGraphBuilding();
-		System.out.println("Graph:"+nwGraph.toString());
+		computePoNetRate(nwGraph);
+		//System.out.println("Graph:"+nwGraph.toString());
 	}
 	///////////////////////////////////////////////////////
 	// direct graph build using my own graph class
@@ -146,6 +147,7 @@ public class dataMain{
 	 * first build direct graph by follower_gcc.anony.dat second add edge weight
 	 * by mention or retweet data
 	 */
+	/*
 	public static  DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> directGraphBuild() throws IOException{
 		DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> netBaseDireG =
 	            new DefaultDirectedWeightedGraph<String, DefaultWeightedEdge>(DefaultWeightedEdge.class);
@@ -296,6 +298,7 @@ public class dataMain{
 		}
 		
 	}
+	*/
 	public static File fileClassBuild(String path){
 		if(path == null){
 			System.out.println("path null!!");
